@@ -91,7 +91,25 @@ public class ServiceRequestService {
 
         return requests;
     }
+    // GET AVAILABLE REQUESTS FOR STAFF
+    public List<ServiceRequest> getAvailableRequests(String authenticatedRole) {
 
+        if (!"STAFF".equalsIgnoreCase(authenticatedRole)) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Only STAFF members can view available requests"
+            );
+        }
+
+        List<ServiceRequest> requests =
+                requestRepository.findAvailableRequests();
+
+        for (ServiceRequest request : requests) {
+            enrichRecurringIssueDetails(request);
+        }
+
+        return requests;
+    }
     // GET REQUEST BY ID WITH ACCESS CONTROL
     public ServiceRequest getRequestById(
             int requestId,

@@ -61,7 +61,23 @@ public class ServiceRequestRepository {
 
         return jdbcTemplate.query(sql, requestRowMapper);
     }
+    // Find OPEN requests that have no staff assignment
+    public List<ServiceRequest> findAvailableRequests() {
 
+        String sql = """
+            SELECT sr.*
+            FROM service_requests sr
+            WHERE sr.status = 'OPEN'
+            AND NOT EXISTS (
+                SELECT 1
+                FROM request_assignments ra
+                WHERE ra.request_id = sr.request_id
+            )
+            ORDER BY sr.request_id DESC
+            """;
+
+        return jdbcTemplate.query(sql, requestRowMapper);
+    }
     // Get service request by ID
     public ServiceRequest findById(int requestId) {
 

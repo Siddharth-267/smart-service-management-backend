@@ -10,6 +10,7 @@ public class RequestStatusHistory {
     private String oldStatus;
     private String newStatus;
     private Integer changedBy;
+    private String changedByName;
     private String remarks;
     private LocalDateTime changedAt;
 
@@ -51,6 +52,14 @@ public class RequestStatusHistory {
 
     public void setChangedBy(Integer changedBy) {
         this.changedBy = changedBy;
+    }
+
+    public String getChangedByName() {
+        return changedByName;
+    }
+
+    public void setChangedByName(String changedByName) {
+        this.changedByName = changedByName;
     }
 
     public String getRemarks() {

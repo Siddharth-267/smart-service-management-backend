@@ -1,18 +1,22 @@
 
 
+
 package com.smartservice.management.config;
 
-import org.springframework.context.annotation.Bean;
 import com.smartservice.management.security.JwtAuthenticationFilter;
+
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import org.springframework.http.HttpStatus;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -47,6 +51,18 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
+                        // Public frontend resources
+                        .requestMatchers(
+                                "/",
+                                "/index.html",
+                                "/dashboard.html",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**",
+                                "/favicon.ico"
+                        ).permitAll()
+
+                        // Public API endpoints
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/api/users/register",
@@ -54,12 +70,14 @@ public class SecurityConfig {
                                 "/error"
                         ).permitAll()
 
+                        // ADMIN-only API endpoints
                         .requestMatchers(
                                 "/api/users/**",
                                 "/api/escalation/**",
                                 "/api/database/test"
                         ).hasRole("ADMIN")
 
+                        // All remaining endpoints require authentication
                         .anyRequest().authenticated()
                 )
 

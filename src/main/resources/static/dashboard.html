@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Smart Service Management</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+<header class="app-header">
+
+    <div class="app-brand">
+        <div class="brand-logo">SS</div>
+        <div>
+            <h2>Smart Service Management</h2>
+            <p>Request Management Portal</p>
+        </div>
+    </div>
+
+    <div class="header-user">
+        <div class="user-details">
+            <strong id="headerUserName">Loading...</strong>
+            <span id="headerUserRole">Loading...</span>
+        </div>
+
+        <button id="logoutButton" class="logout-button">
+            Logout
+        </button>
+    </div>
+
+</header>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <p class="sidebar-label">MAIN MENU</p>
+
+        <a href="#overview" class="sidebar-link active">
+            Overview
+        </a>
+
+        <a href="#requests" class="sidebar-link">
+            Service Requests
+        </a>
+
+        <!-- USER MENU -->
+
+        <div id="userMenu" class="role-menu" hidden>
+
+            <p class="sidebar-label">USER OPTIONS</p>
+
+            <a href="#createRequest" class="sidebar-link">
+                Create Request
+            </a>
+
+        </div>
+
+        <!-- STAFF MENU -->
+
+        <div id="staffMenu" class="role-menu" hidden>
+
+            <p class="sidebar-label">STAFF OPTIONS</p>
+
+            <a href="#assignedRequests" class="sidebar-link">
+                Assigned Work
+            </a>
+
+        </div>
+
+        <!-- ADMIN MENU -->
+
+        <div id="adminMenu" class="role-menu" hidden>
+
+            <p class="sidebar-label">ADMIN OPTIONS</p>
+
+            <a href="#manageUsers" class="sidebar-link">
+                User Management
+            </a>
+
+            <a href="#escalation" class="sidebar-link">
+                Escalation
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- MAIN DASHBOARD -->
+
+    <main class="dashboard-main">
+
+        <!-- WELCOME SECTION -->
+
+        <section id="overview" class="welcome-section">
+
+            <div>
+
+                <p class="eyebrow">DASHBOARD</p>
+
+                <h1>
+                    Welcome,
+                    <span id="welcomeName">User</span>!
+                </h1>
+
+                <p id="welcomeDescription">
+                    Manage and monitor your service requests here.
+                </p>
+
+            </div>
+
+            <div class="role-badge" id="roleBadge">
+                USER
+            </div>
+
+        </section>
+
+        <!-- STATISTICS -->
+
+        <section class="stats-grid">
+
+            <article class="stat-card">
+                <p>Total Requests</p>
+                <h2 id="totalRequests">--</h2>
+                <span>Accessible requests</span>
+            </article>
+
+            <article class="stat-card">
+                <p>Open Requests</p>
+                <h2 id="openRequests">--</h2>
+                <span>Awaiting or ongoing work</span>
+            </article>
+
+            <article class="stat-card">
+                <p>Resolved Requests</p>
+                <h2 id="resolvedRequests">--</h2>
+                <span>Awaiting final closure or closed</span>
+            </article>
+
+            <article class="stat-card">
+                <p>High Priority</p>
+                <h2 id="highPriorityRequests">--</h2>
+                <span>High priority requests</span>
+            </article>
+
+        </section>
+
+        <!-- =====================================
+             USER DASHBOARD
+        ====================================== -->
+
+        <section
+                id="userDashboard"
+                class="dashboard-panel"
+                hidden>
+
+            <div class="panel-heading">
+
+                <div>
+                    <h2>My Service Requests</h2>
+
+                    <p>
+                        Create and track your personal service requests.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- CREATE REQUEST FORM -->
+
+            <div id="createRequest" class="action-placeholder">
+
+                <h3>Create a New Request</h3>
+
+                <p>
+                    Report a maintenance or service issue
+                    and track its progress.
+                </p>
+
+                <button
+                        type="button"
+                        id="createRequestButton"
+                        class="primary-button">
+
+                    Create Service Request
+
+                </button>
+
+                <form id="createRequestForm" hidden>
+
+                    <div class="form-group">
+
+                        <label for="requestCategory">
+                            Service Category
+                        </label>
+
+                        <select
+                                id="requestCategory"
+                                name="categoryId"
+                                required>
+
+                            <option value="">
+                                Select a category
+                            </option>
+
+                            <option value="1">Plumbing</option>
+                            <option value="2">Electrical</option>
+                            <option value="3">Cleaning</option>
+                            <option value="4">Internet</option>
+                            <option value="5">Maintenance</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="requestTitle">
+                            Request Title
+                        </label>
+
+                        <input
+                                type="text"
+                                id="requestTitle"
+                                name="title"
+                                maxlength="150"
+                                placeholder="Example: Water leakage in hostel"
+                                required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="requestDescription">
+                            Description
+                        </label>
+
+                        <textarea
+                                id="requestDescription"
+                                name="description"
+                                rows="5"
+                                maxlength="5000"
+                                placeholder="Describe the issue in detail..."
+                                required></textarea>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="requestLocation">
+                            Location
+                        </label>
+
+                        <input
+                                type="text"
+                                id="requestLocation"
+                                name="location"
+                                maxlength="150"
+                                placeholder="Example: Hostel Block A"
+                                required>
+
+                    </div>
+
+                    <button
+                            type="submit"
+                            id="submitRequestButton"
+                            class="primary-button">
+
+                        Submit Request
+
+                    </button>
+
+                    <button
+                            type="button"
+                            id="cancelRequestButton"
+                            class="secondary-button">
+
+                        Cancel
+
+                    </button>
+
+                    <p
+                            id="createRequestMessage"
+                            class="form-message"
+                            role="alert">
+                    </p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================
+             STAFF DASHBOARD
+        ====================================== -->
+
+        <section
+                id="staffDashboard"
+                class="dashboard-panel"
+                hidden>
+
+            <div class="panel-heading">
+
+                <div>
+                    <h2>Staff Workspace</h2>
+
+                    <p>
+                        Find available requests and manage your assigned work.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- AVAILABLE REQUESTS -->
+
+            <div class="action-placeholder">
+
+                <h3>Available Service Requests</h3>
+
+                <p>
+                    These requests are open and have not yet been
+                    assigned to any staff member.
+                </p>
+
+                <button
+                        type="button"
+                        id="refreshAvailableButton"
+                        class="primary-button">
+
+                    Refresh Requests
+
+                </button>
+
+                <div
+                        id="availableRequestList"
+                        class="request-list">
+
+                    <p class="empty-message">
+                        Available requests will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- ASSIGNED WORK -->
+
+            <div class="action-placeholder">
+
+                <h3>Your Assigned Work</h3>
+
+                <p>
+                    Requests you have accepted will appear in
+                    the Service Request Overview below.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================
+             ADMIN DASHBOARD
+        ====================================== -->
+
+        <section
+                id="adminDashboard"
+                class="dashboard-panel"
+                hidden>
+
+            <div class="panel-heading">
+
+                <div>
+                    <h2>Administration</h2>
+
+                    <p>
+                        Monitor service operations and manage the system.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- USER MANAGEMENT -->
+
+            <div
+                    id="manageUsers"
+                    class="action-placeholder">
+
+                <h3>User Management</h3>
+
+                <p>
+                    View and manage registered system users.
+                </p>
+
+            </div>
+
+            <!-- ESCALATION -->
+
+            <div
+                    id="escalation"
+                    class="action-placeholder">
+
+                <h3>Overdue Request Escalation</h3>
+
+                <p>
+                    Identify and escalate overdue service requests.
+                </p>
+
+                <button
+                        type="button"
+                        id="runEscalationButton"
+                        class="primary-button">
+
+                    Run Escalation
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================
+             COMMON SERVICE REQUEST LIST
+        ====================================== -->
+
+        <section
+                id="requests"
+                class="dashboard-panel">
+
+            <div class="panel-heading">
+
+                <div>
+                    <h2>Service Request Overview</h2>
+
+                    <p id="requestListDescription">
+                        Your accessible service requests will appear here.
+                    </p>
+                </div>
+
+            </div>
+
+            <div
+                    id="requestList"
+                    class="request-list">
+
+                <p class="empty-message">
+                    Request information will be loaded here.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- ==========================================
+     REQUEST STATUS HISTORY MODAL
+========================================== -->
+
+<div
+        id="historyModal"
+        class="history-modal"
+        hidden>
+
+    <!-- BACKDROP -->
+
+    <div
+            class="history-backdrop"
+            id="historyBackdrop">
+    </div>
+
+    <!-- HISTORY DIALOG -->
+
+    <div
+            class="history-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="historyTitle">
+
+        <!-- MODAL HEADER -->
+
+        <div class="history-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    REQUEST TIMELINE
+                </p>
+
+                <h2 id="historyTitle">
+                    Request Status History
+                </h2>
+
+                <p id="historyRequestId">
+                    Request details
+                </p>
+
+            </div>
+
+            <button
+                    type="button"
+                    id="closeHistoryButton"
+                    class="history-close-button"
+                    aria-label="Close history">
+
+                &times;
+
+            </button>
+
+        </div>
+
+        <!-- HISTORY RECORDS -->
+
+        <div
+                id="historyContent"
+                class="history-content">
+
+            <p class="empty-message">
+                Select a request to view its history.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     DASHBOARD JAVASCRIPT
+========================================== -->
+
+<script src="/js/dashboard.js"></script>
+
+</body>
+</html>

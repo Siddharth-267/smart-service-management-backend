@@ -1,0 +1,325 @@
+/* =================================
+   SMART SERVICE MANAGEMENT
+   Main Frontend Stylesheet
+================================= */
+
+:root {
+    --primary: #3457d5;
+    --primary-dark: #2845b5;
+    --background: #f4f6fb;
+    --surface: #ffffff;
+    --text: #202b45;
+    --muted: #758098;
+    --border: #e1e6f0;
+    --success: #16845b;
+    --shadow: 0 15px 45px rgba(31, 48, 91, 0.10);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--text);
+    background: var(--background);
+    min-height: 100vh;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+/* Main layout */
+
+.auth-page {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    min-height: 100vh;
+}
+
+/* Left branding panel */
+
+.auth-brand {
+    background: linear-gradient(145deg, #192f70, #3457d5);
+    color: white;
+    padding: 70px 9%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.brand-logo {
+    width: 58px;
+    height: 58px;
+    background: white;
+    color: var(--primary);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    font-weight: 800;
+    margin-bottom: 35px;
+    letter-spacing: -1px;
+}
+
+.auth-brand h1 {
+    font-size: clamp(30px, 3.5vw, 45px);
+    line-height: 1.2;
+    margin-bottom: 22px;
+    letter-spacing: -1px;
+}
+
+.brand-description {
+    max-width: 390px;
+    line-height: 1.8;
+    color: #dce5ff;
+    font-size: 16px;
+    margin-bottom: 35px;
+}
+
+.brand-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #f0f3ff;
+    font-size: 15px;
+}
+
+.feature-item::first-letter {
+    color: #79e0b3;
+}
+
+.brand-footer {
+    margin-top: 65px;
+    color: #c3d0fa;
+    font-size: 13px;
+}
+
+/* Right panel */
+
+.auth-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 45px 25px 20px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 450px;
+    background: var(--surface);
+    padding: 45px;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+}
+
+.auth-heading {
+    margin-bottom: 30px;
+}
+
+.eyebrow {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+}
+
+.auth-heading h2 {
+    font-size: 27px;
+    letter-spacing: -0.7px;
+    margin-bottom: 10px;
+}
+
+.auth-heading > p:last-child {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Forms */
+
+.form-group {
+    margin-bottom: 21px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 650;
+    margin-bottom: 9px;
+}
+
+.form-group input {
+    width: 100%;
+    height: 49px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0 14px;
+    outline: none;
+    background: #fbfcff;
+    color: var(--text);
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+    color: #a2aabc;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(52, 87, 213, 0.12);
+}
+
+/* Primary button */
+
+.primary-button {
+    width: 100%;
+    height: 49px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    background: var(--primary);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.primary-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.primary-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Messages */
+
+.form-message {
+    min-height: 20px;
+    margin-top: 13px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #c0392b;
+}
+
+.form-message:empty {
+    display: none;
+}
+
+.form-message.success {
+    color: var(--success);
+}
+
+/* Login and registration switch */
+
+.auth-switch {
+    margin-top: 25px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.text-button {
+    border: none;
+    background: none;
+    color: var(--primary);
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+.text-button:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+
+.page-footer {
+    max-width: 450px;
+    margin-top: 25px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* Mobile branding */
+
+.mobile-brand {
+    display: none;
+}
+
+/* Accessibility */
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid rgba(52, 87, 213, 0.25);
+    outline-offset: 2px;
+}
+
+/* Responsive layout */
+
+@media (max-width: 850px) {
+    .auth-page {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-brand {
+        display: none;
+    }
+
+    .auth-content {
+        min-height: 100vh;
+        padding: 30px 18px;
+    }
+
+    .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        font-weight: 750;
+        font-size: 16px;
+        margin-bottom: 35px;
+    }
+
+    .mobile-brand .brand-logo {
+        width: 43px;
+        height: 43px;
+        font-size: 18px;
+        margin: 0;
+        background: #eaf0ff;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 30px 22px;
+        border-radius: 13px;
+    }
+
+    .auth-heading h2 {
+        font-size: 23px;
+    }
+
+    .auth-content {
+        padding: 20px 14px;
+    }
+}

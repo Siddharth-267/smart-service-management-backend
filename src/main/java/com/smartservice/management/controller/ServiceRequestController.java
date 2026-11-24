@@ -61,6 +61,19 @@ public class ServiceRequestController {
 
         return ResponseEntity.ok(requests);
     }
+    // GET AVAILABLE OPEN REQUESTS FOR STAFF
+    @GetMapping("/available")
+    public ResponseEntity<List<ServiceRequest>> getAvailableRequests(
+            Authentication authentication) {
+
+        String authenticatedRole =
+                getAuthenticatedRole(authentication);
+
+        List<ServiceRequest> requests =
+                requestService.getAvailableRequests(authenticatedRole);
+
+        return ResponseEntity.ok(requests);
+    }
 
     // Get an individual request with access verification
     @GetMapping("/{id}")

@@ -29,7 +29,9 @@ public class RequestStatusHistoryRepository {
 
                 int changedByValue = rs.getInt("changed_by");
                 Integer changedBy = rs.wasNull() ? null : changedByValue;
+
                 history.setChangedBy(changedBy);
+                history.setChangedByName(rs.getString("changed_by_name"));
 
                 history.setRemarks(rs.getString("remarks"));
 
@@ -68,10 +70,20 @@ public class RequestStatusHistoryRepository {
     public List<RequestStatusHistory> findByRequestId(int requestId) {
 
         String sql = """
-                SELECT *
-                FROM request_status_history
-                WHERE request_id = ?
-                ORDER BY changed_at DESC
+                SELECT
+                    h.history_id,
+                    h.request_id,
+                    h.old_status,
+                    h.new_status,
+                    h.changed_by,
+                    u.name AS changed_by_name,
+                    h.remarks,
+                    h.changed_at
+                FROM request_status_history h
+                LEFT JOIN users u
+                    ON h.changed_by = u.user_id
+                WHERE h.request_id = ?
+                ORDER BY h.changed_at DESC
                 """;
 
         return jdbcTemplate.query(
